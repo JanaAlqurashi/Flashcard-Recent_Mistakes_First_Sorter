@@ -1,24 +1,28 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RecentMistakesFirstSorter implements CardOrganizer {
+   public RecentMistakesFirstSorter() {
+   }
 
-    @Override
-    public List<Card> organize(List<Card> cards) {
-        List<Card> incorrect = new ArrayList<>();
-        List<Card> others = new ArrayList<>();
+   public List<Card> organize(List<Card> var1) {
+      ArrayList var2 = new ArrayList();
+      ArrayList var3 = new ArrayList();
+      Iterator var4 = var1.iterator();
 
-        for (Card c : cards) {
-            if (c.wasIncorrectInLastRound()) {
-                incorrect.add(c);
-            } else {
-                others.add(c);
-            }
-        }
+      while(var4.hasNext()) {
+         Card var5 = (Card)var4.next();
+         if (var5.wasIncorrectInLastRound()) {
+            var2.add(var5);
+         } else {
+            var3.add(var5);
+         }
+      }
 
-        List<Card> result = new ArrayList<>(cards.size());
-        result.addAll(incorrect);
-        result.addAll(others);
-        return result;
-    }
+      ArrayList var6 = new ArrayList(var1.size());
+      var6.addAll(var2);
+      var6.addAll(var3);
+      return var6;
+   }
 }
